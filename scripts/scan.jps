@@ -1,5 +1,4 @@
 type: update
-version: 0.1
 name: Scanning of Clamav
 baseUrl: https://raw.githubusercontent.com/panslothda/Jelastic-Clamav/master
 logo: images/clamav-logo.png
