@@ -1,5 +1,4 @@
 type: update
-version: 1.1
 name: Clamav Anti-virus 
 baseUrl: https://raw.githubusercontent.com/panslothda/Jelastic-Clamav/master
 description: 
