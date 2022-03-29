@@ -1,6 +1,6 @@
 type: update
 name: Scanning of Clamav
-baseUrl: https://raw.githubusercontent.com/panslothda/Jelastic-Clamav/master
+baseUrl: https://raw.githubusercontent.com/Aureliolo/Jelastic-Clamav/master
 logo: images/clamav-logo.png
 
 
