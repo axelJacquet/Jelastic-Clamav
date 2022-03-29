@@ -28,7 +28,7 @@ Log Entries are saved into the file /var/log/clamav/clamav.log
 
 You can directly import this link by JPS import:
 ```
-https://raw.githubusercontent.com/panslothda/Jelastic-Addon-Clamav-Antivirus/master/main.jps
+https://raw.githubusercontent.com/Aureliolo/Jelastic-Addon-Clamav-Antivirus/master/main.jps
 ```
 
 Or you can copy paste the main.jps into the Import tab.
