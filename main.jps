@@ -1,6 +1,6 @@
 type: update
 name: Clamav Anti-virus 
-baseUrl: https://raw.githubusercontent.com/Aureliolo/Jelastic-Clamav/master
+baseUrl: https://raw.githubusercontent.com/axelJacquet/Jelastic-Clamav/master
 description: 
   text: /text/description.md
   short: Virus Scan protection with Clamav, NO Automatic Scanning!  
