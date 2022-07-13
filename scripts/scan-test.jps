@@ -1,0 +1,67 @@
+type: update
+name: Scanning of Clamav
+baseUrl: https://raw.githubusercontent.com/axelJacquet/Jelastic-Clamav/master
+logo: images/clamav-logo.png
+
+
+onInstall:
+  - scan
+
+actions:
+#  prepare:
+#    - log: prepare the command to use and get necessary info like mount points
+#    - if (${settings.enable-mounts} === true):
+#        api[${targetNodes.nodeGroup}]:
+#          - method: environment.file.getmountpoints
+#            params:
+# TO DO MOUNT POINT MODIFICATIONS
+
+  scan:
+    - if (${settings.expert} === true):
+        - log: Expert mode enabled, using custom scan command
+        - cmd [${settings.node}]: |-
+            date=$(date)
+            echo "-------------------------------------------------------------------------------" >> /var/log/clamav/clamav.log
+            echo "" >> /var/log/clamav/clamav.log
+            echo "This following Scan has been started at" $date >> /var/log/clamav/clamav.log
+            echo "" >> /var/log/clamav/clamav.log
+            echo "Scan is now running..." >> /var/log/clamav/clamav.log
+            echo "" >> /var/log/clamav/clamav.log
+            freshclam
+            chmod 755 /var/run/screen;/usr/bin/pkill screen;screen -wipe;screen -d -m ${settings.expert-command}
+          user: root
+          sayYes: true 
+
+    - elif (${settings.include-dirs} === true):
+        - log: Only scan one folder enabled
+        - cmd [${settings.node}]: |-
+            date=$(date)
+            echo "-------------------------------------------------------------------------------" >> /var/log/clamav/clamav.log
+            echo "" >> /var/log/clamav/clamav.log
+            echo "This following Scan has been started at" $date >> /var/log/clamav/clamav.log
+            echo "" >> /var/log/clamav/clamav.log
+            echo "Scan is now running..." >> /var/log/clamav/clamav.log
+            echo "" >> /var/log/clamav/clamav.log
+            freshclam
+            chmod 755 /var/run/screen;/usr/bin/pkill screen;screen -wipe;screen -d -m clamscan --infected --recursive -l /var/log/clamav/clamav.log --move=/opt/clamav_quarantined ${settings.include-dirs-path} > /dev/null 2>&1
+          user: root
+          sayYes: true 
+  
+    - elif (${settings.enable-mounts} === true):         
+        - log: Default mode enabled, using default command with mounts enabled
+        - cmd [${settings.node}]: |-
+            date=$(date)
+            echo "-------------------------------------------------------------------------------" >> /var/log/clamav/clamav.log
+            echo "" >> /var/log/clamav/clamav.log
+            echo "This following Scan has been started at" $date >> /var/log/clamav/clamav.log
+            echo "" >> /var/log/clamav/clamav.log
+            echo "Scan is now running..." >> /var/log/clamav/clamav.log
+            echo "" >> /var/log/clamav/clamav.log
+            freshclam
+            chmod 755 /var/run/screen;/usr/bin/pkill screen;screen -wipe;screen -d -m clamscan --infected --recursive --exclude-dir="^/sys" --exclude-dir="^/dev" --exclude-dir="^/proc" -l /var/log/clamav/clamav.log --move=/opt/clamav_quarantined / > /dev/null 2>&1
+          user: root
+          sayYes: true
+
+return:
+  type: success
+  message: Node will be Scanned in the Background and if any infected Files are found they will be quarantined by default. Output is beeing logged to /var/log/clamav/clamav.log
