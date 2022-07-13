@@ -9,7 +9,7 @@ onInstall:
   - return:
       type: success
       message: Node will be Scanned in the Background and if any infected Files are found they will be quarantined by default. Output is beeing logged to /var/log/clamav/clamav.log
-      email: Node: node${targetNodes[0].id} scan successfull, output of scan is logged to /var/log/clamav/clamav.log
+      email: Node: node${settings.nodeid} scan successfull, output of scan is logged to /var/log/clamav/clamav.log
 
 actions:
   scan:
@@ -57,7 +57,3 @@ actions:
             chmod 755 /var/run/screen;/usr/bin/pkill screen;screen -wipe;screen -d -m clamscan --infected --recursive --exclude-dir="^/sys" --exclude-dir="^/dev" --exclude-dir="^/proc" -l /var/log/clamav/clamav.log --move=/opt/clamav_quarantined / > /dev/null 2>&1
           user: root
           sayYes: true
-
-success:
-  email: false
-  text: testststsstst
