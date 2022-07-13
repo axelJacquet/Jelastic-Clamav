@@ -8,14 +8,6 @@ onInstall:
   - scan
 
 actions:
-#  prepare:
-#    - log: prepare the command to use and get necessary info like mount points
-#    - if (${settings.enable-mounts} === true):
-#        api[${targetNodes.nodeGroup}]:
-#          - method: environment.file.getmountpoints
-#            params:
-# TO DO MOUNT POINT MODIFICATIONS
-
   scan:
     - if (${settings.expert} === true):
         - log: Expert mode enabled, using custom scan command
@@ -62,6 +54,6 @@ actions:
           user: root
           sayYes: true
 
-return:
-  type: success
-  message: Node will be Scanned in the Background and if any infected Files are found they will be quarantined by default. Output is beeing logged to /var/log/clamav/clamav.log
+success:
+  email: false
+  text: testststsstst
