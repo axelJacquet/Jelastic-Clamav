@@ -6,8 +6,8 @@ logo: images/clamav-logo.png
 
 onInstall:
   - scan
-  script: |
-    return {"result": "success", "message": "Node will be Scanned in the Background and if any infected Files are found they will be quarantined by default. Output is beeing logged to /var/log/clamav/clamav.log","email": "Node: node${targetNodes[0].id} scan successfull, output of scan is logged to /var/log/clamav/clamav.log "}
+  - script: |
+       return {"result": "success", "message": "Node will be Scanned in the Background and if any infected Files are found they will be quarantined by default. Output is beeing logged to /var/log/clamav/clamav.log","email": "Node: node${targetNodes[0].id} scan successfull, output of scan is logged to /var/log/clamav/clamav.log "}
 
 actions:
   scan:
